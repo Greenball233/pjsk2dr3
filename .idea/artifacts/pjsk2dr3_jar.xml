@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="pjsk2dr3:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/pjsk2dr3_jar</output-path>
-    <root id="archive" name="pjsk2dr3.jar">
-      <element id="module-output" name="pjsk2dr3" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.9.0/gson-2.9.0.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>
