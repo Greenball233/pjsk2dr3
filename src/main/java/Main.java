@@ -234,29 +234,27 @@ public class Main {
                     int lerpJingdu = Math.round((noteData.tick - parentNoteData.tick) * 8f / ticksPerBeat);
                     if (lerpJingdu < 2) lerpJingdu = 2;
                     int newParent = noteData.parent;
-                    if (parentNoteData.pjskWidth != noteData.pjskWidth || parentNoteData.pjskPos != noteData.pjskPos) {
-                        for (int i = 1; i < lerpJingdu; i++) {
-                            NoteData lerpedNoteData = new NoteData();
-                            lerpedNoteData.id = id;
-                            lerpedNoteData.type = parentNoteData.type == 1 || parentNoteData.type == 6 || parentNoteData.type == 7 ? 6 : 11;
-                            lerpedNoteData.time = i * (noteData.time - parentNoteData.time) / lerpJingdu + parentNoteData.time;
-                            if (parentNoteData.pjskPos == noteData.pjskPos) {
-                                lerpedNoteData.pos = parentNoteData.pos;
-                            } else {
-                                lerpedNoteData.pos = pjskPos2Dr3Pos(lerp(parentNoteData.pjskPos, noteData.pjskPos, i * 1f / lerpJingdu, parentNoteData.easeType));
-                            }
-                            if (parentNoteData.pjskWidth == noteData.pjskWidth) {
-                                lerpedNoteData.width = parentNoteData.width;
-                            } else {
-                                int parentRight = parentNoteData.pjskPos + parentNoteData.pjskWidth;
-                                int noteRight = noteData.pjskPos + noteData.pjskWidth;
-                                lerpedNoteData.width = pjskPos2Dr3Pos(lerp(parentRight, noteRight, i * 1f / lerpJingdu, parentNoteData.easeType)) - lerpedNoteData.pos;
-                            }
-                            lerpedNoteData.parent = newParent;
-                            newParent = lerpedNoteData.id;
-                            id++;
-                            sb.append(lerpedNoteData).append(separator);
+                    for (int i = 1; i < lerpJingdu; i++) {
+                        NoteData lerpedNoteData = new NoteData();
+                        lerpedNoteData.id = id;
+                        lerpedNoteData.type = parentNoteData.type == 1 || parentNoteData.type == 6 || parentNoteData.type == 7 ? 6 : 11;
+                        lerpedNoteData.time = i * (noteData.time - parentNoteData.time) / lerpJingdu + parentNoteData.time;
+                        if (parentNoteData.pjskPos == noteData.pjskPos) {
+                            lerpedNoteData.pos = parentNoteData.pos;
+                        } else {
+                            lerpedNoteData.pos = pjskPos2Dr3Pos(lerp(parentNoteData.pjskPos, noteData.pjskPos, i * 1f / lerpJingdu, parentNoteData.easeType));
                         }
+                        if (parentNoteData.pjskWidth == noteData.pjskWidth) {
+                            lerpedNoteData.width = parentNoteData.width;
+                        } else {
+                            int parentRight = parentNoteData.pjskPos + parentNoteData.pjskWidth;
+                            int noteRight = noteData.pjskPos + noteData.pjskWidth;
+                            lerpedNoteData.width = pjskPos2Dr3Pos(lerp(parentRight, noteRight, i * 1f / lerpJingdu, parentNoteData.easeType)) - lerpedNoteData.pos;
+                        }
+                        lerpedNoteData.parent = newParent;
+                        newParent = lerpedNoteData.id;
+                        id++;
+                        sb.append(lerpedNoteData).append(separator);
                     }
                     noteData.parent = newParent;
                 }
